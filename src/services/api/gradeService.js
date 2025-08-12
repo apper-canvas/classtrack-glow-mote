@@ -49,7 +49,15 @@ export const gradeService = {
       throw new Error("Grade not found");
     }
     
-    grades.splice(index, 1);
+grades.splice(index, 1);
     return true;
+  },
+
+  async getGradeTrends(studentId) {
+    await new Promise(resolve => setTimeout(resolve, 200));
+    return grades
+      .filter(grade => grade.studentId === parseInt(studentId))
+      .sort((a, b) => new Date(a.date) - new Date(b.date))
+      .map(grade => ({ ...grade }));
   }
 };
