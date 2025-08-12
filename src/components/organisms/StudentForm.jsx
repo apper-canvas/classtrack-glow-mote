@@ -23,14 +23,27 @@ const [formData, setFormData] = useState({
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
 
-  useEffect(() => {
+useEffect(() => {
     loadClasses();
     if (student) {
-setFormData({
+      // Format date_of_birth_c for HTML date input (YYYY-MM-DD format)
+      let formattedDateOfBirth = "";
+      if (student.date_of_birth_c) {
+        try {
+          const date = new Date(student.date_of_birth_c);
+          if (!isNaN(date.getTime())) {
+            formattedDateOfBirth = date.toISOString().split('T')[0];
+          }
+        } catch (error) {
+          console.error("Error formatting date:", error);
+        }
+      }
+
+      setFormData({
         first_name_c: student.first_name_c || "",
         last_name_c: student.last_name_c || "",
         grade_level_c: student.grade_level_c || "",
-        date_of_birth_c: student.date_of_birth_c || "",
+        date_of_birth_c: formattedDateOfBirth,
         email_c: student.email_c || "",
         phone_c: student.phone_c || "",
         class_ids_c: Array.isArray(student.class_ids_c) ? student.class_ids_c : (student.class_ids_c ? student.class_ids_c.toString().split(',').map(id => parseInt(id)) : []),
