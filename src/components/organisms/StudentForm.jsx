@@ -44,20 +44,20 @@ setFormData({
     }
   };
 
-  const validateForm = () => {
+const validateForm = () => {
     const newErrors = {};
     
-    if (!formData.firstName.trim()) {
+    if (!formData.firstName || !formData.firstName.trim()) {
       newErrors.firstName = "First name is required";
     }
     
-    if (!formData.lastName.trim()) {
+    if (!formData.lastName || !formData.lastName.trim()) {
       newErrors.lastName = "Last name is required";
     }
     
     if (!formData.gradeLevel) {
       newErrors.gradeLevel = "Grade level is required";
-}
+    }
     
     if (!formData.dateOfBirth) {
       newErrors.dateOfBirth = "Date of birth is required";
@@ -119,12 +119,12 @@ setFormData({
   ];
 
   return (
-    <form onSubmit={handleSubmit} className="p-6 space-y-6">
+<form onSubmit={handleSubmit} className="p-6 space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <FormField
           label="First Name"
           type="text"
-          value={formData.firstName}
+          value={formData.firstName || ""}
           onChange={(e) => handleChange("firstName", e.target.value)}
           error={errors.firstName}
           required
@@ -133,7 +133,7 @@ setFormData({
         <FormField
           label="Last Name"
           type="text"
-          value={formData.lastName}
+          value={formData.lastName || ""}
           onChange={(e) => handleChange("lastName", e.target.value)}
           error={errors.lastName}
           required
@@ -142,7 +142,7 @@ setFormData({
         <FormField
           label="Grade Level"
           type="select"
-          value={formData.gradeLevel}
+          value={formData.gradeLevel || ""}
           onChange={(e) => handleChange("gradeLevel", e.target.value)}
           options={gradeOptions}
           error={errors.gradeLevel}
@@ -152,7 +152,7 @@ setFormData({
         <FormField
           label="Date of Birth"
           type="date"
-          value={formData.dateOfBirth}
+          value={formData.dateOfBirth || ""}
           onChange={(e) => handleChange("dateOfBirth", e.target.value)}
           error={errors.dateOfBirth}
           required
@@ -161,7 +161,7 @@ setFormData({
         <FormField
           label="Email"
           type="email"
-          value={formData.email}
+          value={formData.email || ""}
           onChange={(e) => handleChange("email", e.target.value)}
           error={errors.email}
         />
@@ -169,7 +169,7 @@ setFormData({
         <FormField
           label="Phone"
           type="tel"
-          value={formData.phone}
+          value={formData.phone || ""}
           onChange={(e) => handleChange("phone", e.target.value)}
           error={errors.phone}
         />
