@@ -29,12 +29,15 @@ const AttendanceTracker = () => {
     loadInitialData();
   }, []);
 
-  useEffect(() => {
+useEffect(() => {
     if (selectedClass) {
       loadClassData();
+    } else {
+      // Clear students when no class is selected
+      setStudents([]);
+      setAttendance([]);
     }
   }, [selectedClass, selectedDate]);
-
   const loadInitialData = async () => {
     setLoading(true);
     setError("");
@@ -66,9 +69,11 @@ const classData = await classService.getAll();
       ]);
 
 const classId = parseInt(selectedClass);
-      const filteredStudents = studentData.filter(student => 
-        student.class_ids_c && student.class_ids_c.toString().split(',').map(id => parseInt(id)).includes(classId)
-      );
+      const filteredStudents = studentData.filter(student => {
+        if (!student.class_ids_c) return false;
+        const classIds = student.class_ids_c.toString().split(',').map(id => parseInt(id.trim()));
+        return classIds.includes(classId);
+      });
       const filteredAttendance = attendanceData.filter(att => 
         (att.class_id_c?.Id === classId || att.class_id_c === classId) && att.date_c === selectedDate
       );
