@@ -52,24 +52,24 @@ setFormData({
 const validateForm = () => {
     const newErrors = {};
     
-    if (!formData.firstName || !formData.firstName.trim()) {
-      newErrors.firstName = "First name is required";
+    if (!formData.first_name_c || !formData.first_name_c.trim()) {
+      newErrors.first_name_c = "First name is required";
     }
     
-    if (!formData.lastName || !formData.lastName.trim()) {
-      newErrors.lastName = "Last name is required";
+    if (!formData.last_name_c || !formData.last_name_c.trim()) {
+      newErrors.last_name_c = "Last name is required";
     }
     
-    if (!formData.gradeLevel) {
-      newErrors.gradeLevel = "Grade level is required";
+    if (!formData.grade_level_c) {
+      newErrors.grade_level_c = "Grade level is required";
     }
     
-    if (!formData.dateOfBirth) {
-      newErrors.dateOfBirth = "Date of birth is required";
+    if (!formData.date_of_birth_c) {
+      newErrors.date_of_birth_c = "Date of birth is required";
     }
     
-    if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Valid email is required";
+    if (formData.email_c && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email_c)) {
+      newErrors.email_c = "Valid email is required";
     }
 
     setErrors(newErrors);
@@ -129,54 +129,54 @@ const validateForm = () => {
         <FormField
           label="First Name"
           type="text"
-          value={formData.firstName || ""}
-          onChange={(e) => handleChange("firstName", e.target.value)}
-          error={errors.firstName}
+          value={formData.first_name_c || ""}
+          onChange={(e) => handleChange("first_name_c", e.target.value)}
+          error={errors.first_name_c}
           required
         />
 
         <FormField
           label="Last Name"
           type="text"
-          value={formData.lastName || ""}
-          onChange={(e) => handleChange("lastName", e.target.value)}
-          error={errors.lastName}
+          value={formData.last_name_c || ""}
+          onChange={(e) => handleChange("last_name_c", e.target.value)}
+          error={errors.last_name_c}
           required
         />
 
         <FormField
           label="Grade Level"
           type="select"
-          value={formData.gradeLevel || ""}
-          onChange={(e) => handleChange("gradeLevel", e.target.value)}
+          value={formData.grade_level_c || ""}
+          onChange={(e) => handleChange("grade_level_c", e.target.value)}
           options={gradeOptions}
-          error={errors.gradeLevel}
+          error={errors.grade_level_c}
           required
         />
 
         <FormField
           label="Date of Birth"
           type="date"
-          value={formData.dateOfBirth || ""}
-          onChange={(e) => handleChange("dateOfBirth", e.target.value)}
-          error={errors.dateOfBirth}
+          value={formData.date_of_birth_c || ""}
+          onChange={(e) => handleChange("date_of_birth_c", e.target.value)}
+          error={errors.date_of_birth_c}
           required
         />
 
         <FormField
           label="Email"
           type="email"
-          value={formData.email || ""}
-          onChange={(e) => handleChange("email", e.target.value)}
-          error={errors.email}
+          value={formData.email_c || ""}
+          onChange={(e) => handleChange("email_c", e.target.value)}
+          error={errors.email_c}
         />
 
-<FormField
+        <FormField
           label="Phone"
           type="tel"
           value={formData.phone_c || ""}
           onChange={(e) => handleChange("phone_c", e.target.value)}
-          error={errors.phone}
+          error={errors.phone_c}
         />
 
         <FormField
@@ -191,7 +191,7 @@ const validateForm = () => {
             { value: "Other", label: "Other" },
             { value: "Prefer not to say", label: "Prefer not to say" }
           ]}
-          error={errors.gender}
+          error={errors.gender_c}
         />
       </div>
 
