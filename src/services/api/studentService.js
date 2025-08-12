@@ -92,6 +92,12 @@ export const studentService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
+// Validate email format before processing
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (studentData.email_c && !emailRegex.test(studentData.email_c)) {
+        throw new Error('Please provide a valid email address');
+      }
+
       // Format data for Apper backend - only include Updateable fields
       const formattedData = {
         Name: studentData.Name || `${studentData.first_name_c || ''} ${studentData.last_name_c || ''}`.trim(),
@@ -151,6 +157,12 @@ export const studentService = {
         apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
+
+// Validate email format before processing
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (studentData.email_c && !emailRegex.test(studentData.email_c)) {
+        throw new Error('Please provide a valid email address');
+      }
 
       // Format data for Apper backend - only include Updateable fields
       const formattedData = {

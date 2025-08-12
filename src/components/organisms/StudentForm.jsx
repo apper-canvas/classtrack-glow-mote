@@ -16,6 +16,8 @@ const [formData, setFormData] = useState({
     phone_c: "",
     class_ids_c: []
   });
+  
+  const [validationErrors, setValidationErrors] = useState({});
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
@@ -32,6 +34,7 @@ setFormData({
         phone_c: student.phone_c || "",
         class_ids_c: Array.isArray(student.class_ids_c) ? student.class_ids_c : (student.class_ids_c ? student.class_ids_c.toString().split(',').map(id => parseInt(id)) : [])
       });
+      setValidationErrors({});
     }
   }, [student]);
 
