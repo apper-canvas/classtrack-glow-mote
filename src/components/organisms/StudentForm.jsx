@@ -57,10 +57,10 @@ setFormData({
     
     if (!formData.gradeLevel) {
       newErrors.gradeLevel = "Grade level is required";
-    }
+}
     
-if (!formData.date_of_birth_c) {
-      newErrors.date_of_birth_c = "Date of birth is required";
+    if (!formData.dateOfBirth) {
+      newErrors.dateOfBirth = "Date of birth is required";
     }
     
     if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
