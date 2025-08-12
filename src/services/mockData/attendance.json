@@ -1,0 +1,82 @@
+[
+  {
+    "Id": 1,
+    "studentId": 1,
+    "classId": 1,
+    "date": "2024-01-15",
+    "status": "Present",
+    "notes": ""
+  },
+  {
+    "Id": 2,
+    "studentId": 1,
+    "classId": 2,
+    "date": "2024-01-15",
+    "status": "Present",
+    "notes": ""
+  },
+  {
+    "Id": 3,
+    "studentId": 2,
+    "classId": 1,
+    "date": "2024-01-15",
+    "status": "Late",
+    "notes": "Arrived 10 minutes late"
+  },
+  {
+    "Id": 4,
+    "studentId": 2,
+    "classId": 2,
+    "date": "2024-01-15",
+    "status": "Present",
+    "notes": ""
+  },
+  {
+    "Id": 5,
+    "studentId": 3,
+    "classId": 2,
+    "date": "2024-01-15",
+    "status": "Absent",
+    "notes": "Sick"
+  },
+  {
+    "Id": 6,
+    "studentId": 3,
+    "classId": 3,
+    "date": "2024-01-15",
+    "status": "Absent",
+    "notes": "Sick"
+  },
+  {
+    "Id": 7,
+    "studentId": 4,
+    "classId": 1,
+    "date": "2024-01-15",
+    "status": "Present",
+    "notes": ""
+  },
+  {
+    "Id": 8,
+    "studentId": 1,
+    "classId": 1,
+    "date": "2024-01-16",
+    "status": "Present",
+    "notes": ""
+  },
+  {
+    "Id": 9,
+    "studentId": 2,
+    "classId": 1,
+    "date": "2024-01-16",
+    "status": "Present",
+    "notes": ""
+  },
+  {
+    "Id": 10,
+    "studentId": 3,
+    "classId": 2,
+    "date": "2024-01-16",
+    "status": "Present",
+    "notes": ""
+  }
+]

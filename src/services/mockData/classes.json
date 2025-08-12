@@ -1,0 +1,34 @@
+[
+  {
+    "Id": 1,
+    "name": "Algebra II",
+    "subject": "Mathematics",
+    "room": "Room 201",
+    "schedule": "MWF 9:00-9:50 AM",
+    "studentIds": [1, 2, 4, 6, 7]
+  },
+  {
+    "Id": 2,
+    "name": "English Literature",
+    "subject": "English",
+    "room": "Room 105",
+    "schedule": "TTh 10:00-11:15 AM",
+    "studentIds": [1, 2, 3, 5, 7, 8]
+  },
+  {
+    "Id": 3,
+    "name": "Chemistry",
+    "subject": "Science",
+    "room": "Lab 301",
+    "schedule": "MWF 1:00-1:50 PM",
+    "studentIds": [1, 3, 4, 6, 8]
+  },
+  {
+    "Id": 4,
+    "name": "World History",
+    "subject": "Social Studies",
+    "room": "Room 208",
+    "schedule": "TTh 2:00-3:15 PM",
+    "studentIds": [2, 3, 5, 6]
+  }
+]

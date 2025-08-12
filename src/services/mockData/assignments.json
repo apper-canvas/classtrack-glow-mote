@@ -1,0 +1,65 @@
+[
+  {
+    "Id": 1,
+    "classId": 1,
+    "name": "Quadratic Functions Quiz",
+    "type": "Quiz",
+    "maxScore": 100,
+    "dueDate": "2024-01-15",
+    "weight": 0.15
+  },
+  {
+    "Id": 2,
+    "classId": 1,
+    "name": "Polynomial Operations Test",
+    "type": "Test",
+    "maxScore": 100,
+    "dueDate": "2024-01-22",
+    "weight": 0.25
+  },
+  {
+    "Id": 3,
+    "classId": 2,
+    "name": "Shakespeare Essay",
+    "type": "Essay",
+    "maxScore": 100,
+    "dueDate": "2024-01-18",
+    "weight": 0.20
+  },
+  {
+    "Id": 4,
+    "classId": 2,
+    "name": "Poetry Analysis",
+    "type": "Assignment",
+    "maxScore": 50,
+    "dueDate": "2024-01-12",
+    "weight": 0.10
+  },
+  {
+    "Id": 5,
+    "classId": 3,
+    "name": "Chemical Bonds Lab",
+    "type": "Lab",
+    "maxScore": 80,
+    "dueDate": "2024-01-16",
+    "weight": 0.15
+  },
+  {
+    "Id": 6,
+    "classId": 3,
+    "name": "Periodic Table Quiz",
+    "type": "Quiz",
+    "maxScore": 75,
+    "dueDate": "2024-01-20",
+    "weight": 0.15
+  },
+  {
+    "Id": 7,
+    "classId": 4,
+    "name": "WWI Research Project",
+    "type": "Project",
+    "maxScore": 100,
+    "dueDate": "2024-01-25",
+    "weight": 0.30
+  }
+]

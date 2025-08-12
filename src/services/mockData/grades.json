@@ -1,0 +1,92 @@
+[
+  {
+    "Id": 1,
+    "studentId": 1,
+    "classId": 1,
+    "assignmentId": 1,
+    "score": 92,
+    "maxScore": 100,
+    "date": "2024-01-15"
+  },
+  {
+    "Id": 2,
+    "studentId": 1,
+    "classId": 1,
+    "assignmentId": 2,
+    "score": 88,
+    "maxScore": 100,
+    "date": "2024-01-22"
+  },
+  {
+    "Id": 3,
+    "studentId": 1,
+    "classId": 2,
+    "assignmentId": 3,
+    "score": 95,
+    "maxScore": 100,
+    "date": "2024-01-18"
+  },
+  {
+    "Id": 4,
+    "studentId": 1,
+    "classId": 2,
+    "assignmentId": 4,
+    "score": 48,
+    "maxScore": 50,
+    "date": "2024-01-12"
+  },
+  {
+    "Id": 5,
+    "studentId": 2,
+    "classId": 1,
+    "assignmentId": 1,
+    "score": 85,
+    "maxScore": 100,
+    "date": "2024-01-15"
+  },
+  {
+    "Id": 6,
+    "studentId": 2,
+    "classId": 1,
+    "assignmentId": 2,
+    "score": 91,
+    "maxScore": 100,
+    "date": "2024-01-22"
+  },
+  {
+    "Id": 7,
+    "studentId": 2,
+    "classId": 2,
+    "assignmentId": 3,
+    "score": 87,
+    "maxScore": 100,
+    "date": "2024-01-18"
+  },
+  {
+    "Id": 8,
+    "studentId": 3,
+    "classId": 2,
+    "assignmentId": 3,
+    "score": 93,
+    "maxScore": 100,
+    "date": "2024-01-18"
+  },
+  {
+    "Id": 9,
+    "studentId": 3,
+    "classId": 3,
+    "assignmentId": 5,
+    "score": 76,
+    "maxScore": 80,
+    "date": "2024-01-16"
+  },
+  {
+    "Id": 10,
+    "studentId": 4,
+    "classId": 1,
+    "assignmentId": 1,
+    "score": 78,
+    "maxScore": 100,
+    "date": "2024-01-15"
+  }
+]
