@@ -14,7 +14,8 @@ const [formData, setFormData] = useState({
     date_of_birth_c: "",
     email_c: "",
     phone_c: "",
-    class_ids_c: []
+    class_ids_c: [],
+    gender_c: ""
   });
   
   const [validationErrors, setValidationErrors] = useState({});
@@ -32,7 +33,8 @@ setFormData({
         date_of_birth_c: student.date_of_birth_c || "",
         email_c: student.email_c || "",
         phone_c: student.phone_c || "",
-        class_ids_c: Array.isArray(student.class_ids_c) ? student.class_ids_c : (student.class_ids_c ? student.class_ids_c.toString().split(',').map(id => parseInt(id)) : [])
+        class_ids_c: Array.isArray(student.class_ids_c) ? student.class_ids_c : (student.class_ids_c ? student.class_ids_c.toString().split(',').map(id => parseInt(id)) : []),
+        gender_c: student.gender_c || ""
       });
       setValidationErrors({});
     }
@@ -169,12 +171,27 @@ const validateForm = () => {
           error={errors.email}
         />
 
-        <FormField
+<FormField
           label="Phone"
           type="tel"
-          value={formData.phone || ""}
-          onChange={(e) => handleChange("phone", e.target.value)}
+          value={formData.phone_c || ""}
+          onChange={(e) => handleChange("phone_c", e.target.value)}
           error={errors.phone}
+        />
+
+        <FormField
+          label="Gender"
+          type="select"
+          value={formData.gender_c || ""}
+          onChange={(e) => handleChange("gender_c", e.target.value)}
+          options={[
+            { value: "", label: "Select Gender" },
+            { value: "Male", label: "Male" },
+            { value: "Female", label: "Female" },
+            { value: "Other", label: "Other" },
+            { value: "Prefer not to say", label: "Prefer not to say" }
+          ]}
+          error={errors.gender}
         />
       </div>
 

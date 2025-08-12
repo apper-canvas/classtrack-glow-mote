@@ -11,7 +11,7 @@ export const studentService = {
       });
 
       const params = {
-        fields: [
+fields: [
           { field: { Name: "Name" } },
           { field: { Name: "first_name_c" } },
           { field: { Name: "last_name_c" } },
@@ -20,6 +20,7 @@ export const studentService = {
           { field: { Name: "email_c" } },
           { field: { Name: "phone_c" } },
           { field: { Name: "class_ids_c" } },
+          { field: { Name: "gender_c" } },
           { field: { Name: "created_at_c" } },
           { field: { Name: "updated_at_c" } }
         ]
@@ -52,7 +53,7 @@ export const studentService = {
         apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
       });
 
-      const params = {
+const params = {
         fields: [
           { field: { Name: "Name" } },
           { field: { Name: "first_name_c" } },
@@ -62,6 +63,7 @@ export const studentService = {
           { field: { Name: "email_c" } },
           { field: { Name: "phone_c" } },
           { field: { Name: "class_ids_c" } },
+          { field: { Name: "gender_c" } },
           { field: { Name: "created_at_c" } },
           { field: { Name: "updated_at_c" } }
         ]
@@ -99,7 +101,7 @@ export const studentService = {
       }
 
       // Format data for Apper backend - only include Updateable fields
-      const formattedData = {
+const formattedData = {
         Name: studentData.Name || `${studentData.first_name_c || ''} ${studentData.last_name_c || ''}`.trim(),
         first_name_c: studentData.first_name_c,
         last_name_c: studentData.last_name_c,
@@ -108,6 +110,7 @@ export const studentService = {
         email_c: studentData.email_c,
         phone_c: studentData.phone_c,
         class_ids_c: Array.isArray(studentData.class_ids_c) ? studentData.class_ids_c.join(',') : studentData.class_ids_c,
+        gender_c: studentData.gender_c,
         created_at_c: new Date().toISOString(),
         updated_at_c: new Date().toISOString()
       };
@@ -165,7 +168,7 @@ export const studentService = {
       }
 
       // Format data for Apper backend - only include Updateable fields
-      const formattedData = {
+const formattedData = {
         Id: id,
         Name: studentData.Name || `${studentData.first_name_c || ''} ${studentData.last_name_c || ''}`.trim(),
         first_name_c: studentData.first_name_c,
@@ -175,6 +178,7 @@ export const studentService = {
         email_c: studentData.email_c,
         phone_c: studentData.phone_c,
         class_ids_c: Array.isArray(studentData.class_ids_c) ? studentData.class_ids_c.join(',') : studentData.class_ids_c,
+        gender_c: studentData.gender_c,
         updated_at_c: new Date().toISOString()
       };
 
