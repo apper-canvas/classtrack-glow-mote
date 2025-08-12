@@ -1,8 +1,24 @@
 import { motion } from "framer-motion";
+import { useContext } from "react";
 import SearchBar from "@/components/molecules/SearchBar";
 import Button from "@/components/atoms/Button";
 import ApperIcon from "@/components/ApperIcon";
+import { AuthContext } from "../../App";
 
+const LogoutButton = () => {
+  const { logout } = useContext(AuthContext);
+  
+  return (
+    <Button
+      variant="ghost"
+      size="sm"
+      onClick={logout}
+      className="hover:bg-gradient-to-r hover:from-red-50 hover:to-red-100 hover:text-error"
+    >
+      <ApperIcon name="LogOut" className="w-4 h-4" />
+    </Button>
+  );
+};
 const Header = ({ onMenuToggle, onSearch, searchValue, title = "ClassTrack" }) => {
   return (
     <motion.header
@@ -36,7 +52,7 @@ const Header = ({ onMenuToggle, onSearch, searchValue, title = "ClassTrack" }) =
             />
           </div>
           
-          <Button
+<Button
             variant="ghost"
             size="sm"
             className="relative hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50"
@@ -44,6 +60,8 @@ const Header = ({ onMenuToggle, onSearch, searchValue, title = "ClassTrack" }) =
             <ApperIcon name="Bell" className="w-5 h-5" />
             <span className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-error to-red-600 rounded-full" />
           </Button>
+          
+          <LogoutButton />
           
           <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center">
             <ApperIcon name="User" className="w-4 h-4 text-white" />

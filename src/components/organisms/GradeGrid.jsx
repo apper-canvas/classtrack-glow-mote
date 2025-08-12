@@ -38,7 +38,7 @@ const GradeGrid = () => {
     setLoading(true);
     setError("");
     
-    try {
+try {
       const classData = await classService.getAll();
       setClasses(classData);
       
@@ -65,15 +65,15 @@ const GradeGrid = () => {
         gradeService.getAll()
       ]);
 
-      const classId = parseInt(selectedClass);
+const classId = parseInt(selectedClass);
       const filteredStudents = studentData.filter(student => 
-        student.classIds && student.classIds.includes(classId)
+        student.class_ids_c && student.class_ids_c.toString().split(',').map(id => parseInt(id)).includes(classId)
       );
       const filteredAssignments = assignmentData.filter(assignment => 
-        assignment.classId === classId
+        assignment.class_id_c?.Id === classId || assignment.class_id_c === classId
       );
       const filteredGrades = gradeData.filter(grade => 
-        grade.classId === classId
+        grade.class_id_c?.Id === classId || grade.class_id_c === classId
       );
 
       setStudents(filteredStudents);
@@ -86,11 +86,12 @@ const GradeGrid = () => {
     }
   };
 
-  const getGrade = (studentId, assignmentId) => {
+const getGrade = (studentId, assignmentId) => {
     const grade = grades.find(g => 
-      g.studentId === studentId && g.assignmentId === assignmentId
+      (g.student_id_c?.Id === studentId || g.student_id_c === studentId) && 
+      (g.assignment_id_c?.Id === assignmentId || g.assignment_id_c === assignmentId)
     );
-    return grade ? grade.score : "";
+    return grade ? grade.score_c : "";
   };
 
   const handleGradeChange = async (studentId, assignmentId, score) => {
@@ -99,24 +100,25 @@ const GradeGrid = () => {
 
     try {
       const numScore = parseFloat(score);
-      const assignment = assignments.find(a => a.Id === assignmentId);
+const assignment = assignments.find(a => a.Id === assignmentId);
       
-      if (isNaN(numScore) || numScore < 0 || numScore > assignment.maxScore) {
+      if (isNaN(numScore) || numScore < 0 || numScore > assignment.max_score_c) {
         toast.error(`Score must be between 0 and ${assignment.maxScore}`);
         return;
       }
 
-      const existingGrade = grades.find(g => 
-        g.studentId === studentId && g.assignmentId === assignmentId
+const existingGrade = grades.find(g => 
+        (g.student_id_c?.Id === studentId || g.student_id_c === studentId) && 
+        (g.assignment_id_c?.Id === assignmentId || g.assignment_id_c === assignmentId)
       );
 
-      const gradeData = {
-        studentId,
-        classId: parseInt(selectedClass),
-        assignmentId,
-        score: numScore,
-        maxScore: assignment.maxScore,
-        date: new Date().toISOString().split('T')[0]
+const gradeData = {
+        student_id_c: studentId,
+        class_id_c: parseInt(selectedClass),
+        assignment_id_c: assignmentId,
+        score_c: numScore,
+        max_score_c: assignment.max_score_c,
+        date_c: new Date().toISOString().split('T')[0]
       };
 
       if (existingGrade) {
@@ -137,12 +139,12 @@ const GradeGrid = () => {
     }
   };
 
-  const calculateStudentAverage = (studentId) => {
-    const studentGrades = grades.filter(g => g.studentId === studentId);
+const calculateStudentAverage = (studentId) => {
+    const studentGrades = grades.filter(g => g.student_id_c?.Id === studentId || g.student_id_c === studentId);
     if (studentGrades.length === 0) return "N/A";
     
     const total = studentGrades.reduce((sum, grade) => {
-      const percentage = (grade.score / grade.maxScore) * 100;
+      const percentage = (grade.score_c / grade.max_score_c) * 100;
       return sum + percentage;
     }, 0);
     
@@ -175,9 +177,9 @@ const GradeGrid = () => {
               onChange={(e) => setSelectedClass(e.target.value)}
               className="w-48"
             >
-              {classes.map(cls => (
+{classes.map(cls => (
                 <option key={cls.Id} value={cls.Id}>
-                  {cls.name}
+                  {cls.Name}
                 </option>
               ))}
             </Select>
@@ -215,9 +217,9 @@ const GradeGrid = () => {
               onChange={(e) => setSelectedClass(e.target.value)}
               className="w-48"
             >
-              {classes.map(cls => (
+{classes.map(cls => (
                 <option key={cls.Id} value={cls.Id}>
-                  {cls.name}
+                  {cls.Name}
                 </option>
               ))}
             </Select>
@@ -231,12 +233,12 @@ const GradeGrid = () => {
                   <th className="px-4 py-3 text-left text-sm font-semibold text-gray-700">
                     Student
                   </th>
-                  {assignments.map(assignment => (
+{assignments.map(assignment => (
                     <th key={assignment.Id} className="px-4 py-3 text-center text-sm font-semibold text-gray-700 min-w-[120px]">
                       <div className="space-y-1">
-                        <div>{assignment.name}</div>
+                        <div>{assignment.Name}</div>
                         <div className="text-xs text-gray-500">
-                          / {assignment.maxScore}
+                          / {assignment.max_score_c}
                         </div>
                       </div>
                     </th>
@@ -254,12 +256,12 @@ const GradeGrid = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                   >
-                    <td className="px-4 py-4">
+<td className="px-4 py-4">
                       <div className="font-medium text-gray-900">
-                        {student.firstName} {student.lastName}
+                        {student.first_name_c} {student.last_name_c}
                       </div>
                       <div className="text-sm text-gray-500">
-                        Grade {student.gradeLevel}
+                        Grade {student.grade_level_c}
                       </div>
                     </td>
                     {assignments.map(assignment => {
@@ -269,10 +271,10 @@ const GradeGrid = () => {
                       return (
                         <td key={assignment.Id} className="px-4 py-4 text-center">
                           <div className="relative">
-                            <Input
+<Input
                               type="number"
                               min="0"
-                              max={assignment.maxScore}
+                              max={assignment.max_score_c}
                               step="0.1"
                               value={currentGrade}
                               onChange={(e) => handleGradeChange(student.Id, assignment.Id, e.target.value)}

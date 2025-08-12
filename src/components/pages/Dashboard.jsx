@@ -45,23 +45,22 @@ const Dashboard = () => {
       const totalStudents = students.length;
       const totalClasses = classes.length;
       
-      // Calculate average grade
+// Calculate average grade
       let averageGrade = 0;
       if (grades.length > 0) {
         const totalPercentages = grades.reduce((sum, grade) => {
-          return sum + (grade.score / grade.maxScore) * 100;
+          return sum + (grade.score_c / grade.max_score_c) * 100;
         }, 0);
         averageGrade = totalPercentages / grades.length;
       }
 
-      // Calculate attendance rate for today
+// Calculate attendance rate for today
       const today = format(new Date(), "yyyy-MM-dd");
-      const todayAttendance = attendance.filter(att => att.date === today);
-      const presentCount = todayAttendance.filter(att => att.status === "Present").length;
+      const todayAttendance = attendance.filter(att => att.date_c === today);
+      const presentCount = todayAttendance.filter(att => att.status_c === "Present").length;
       const attendanceRate = todayAttendance.length > 0 
         ? (presentCount / todayAttendance.length) * 100 
         : 100;
-
       setStats({
         totalStudents,
         totalClasses,
@@ -74,12 +73,12 @@ const Dashboard = () => {
       
       // Recent grades
       const recentGrades = grades.slice(-3).reverse();
-      recentGrades.forEach(grade => {
-        const student = students.find(s => s.Id === grade.studentId);
+recentGrades.forEach(grade => {
+        const student = students.find(s => s.Id === (grade.student_id_c?.Id || grade.student_id_c));
         if (student) {
           activity.push({
             type: "grade",
-            message: `Grade recorded for ${student.firstName} ${student.lastName}`,
+            message: `Grade recorded for ${student.first_name_c} ${student.last_name_c}`,
             time: "2 hours ago",
             icon: "BookOpen"
           });
@@ -89,11 +88,11 @@ const Dashboard = () => {
       // Recent attendance
       const recentAttendance = todayAttendance.slice(-2);
       recentAttendance.forEach(att => {
-        const student = students.find(s => s.Id === att.studentId);
+        const student = students.find(s => s.Id === (att.student_id_c?.Id || att.student_id_c));
         if (student) {
           activity.push({
             type: "attendance",
-            message: `${student.firstName} ${student.lastName} marked ${att.status.toLowerCase()}`,
+            message: `${student.first_name_c} ${student.last_name_c} marked ${att.status_c.toLowerCase()}`,
             time: "1 hour ago",
             icon: "CheckSquare"
           });

@@ -52,10 +52,10 @@ const Students = () => {
       return;
     }
 
-    const filtered = students.filter(student => 
-      `${student.firstName} ${student.lastName}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      student.gradeLevel.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      (student.email && student.email.toLowerCase().includes(searchTerm.toLowerCase()))
+const filtered = students.filter(student => 
+      `${student.first_name_c} ${student.last_name_c}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      student.grade_level_c.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (student.email_c && student.email_c.toLowerCase().includes(searchTerm.toLowerCase()))
     );
     
     setFilteredStudents(filtered);
@@ -75,8 +75,8 @@ const Students = () => {
     navigate(`/students/${student.Id}`);
   };
 
-  const handleDelete = async (student) => {
-    if (!confirm(`Are you sure you want to delete ${student.firstName} ${student.lastName}?`)) {
+const handleDelete = async (student) => {
+    if (!confirm(`Are you sure you want to delete ${student.first_name_c} ${student.last_name_c}?`)) {
       return;
     }
 
@@ -104,10 +104,10 @@ const Students = () => {
             <ApperIcon name="User" className="w-5 h-5 text-primary" />
           </div>
           <div>
-            <div className="font-medium text-gray-900">
-              {student.firstName} {student.lastName}
+<div className="font-medium text-gray-900">
+              {student.first_name_c} {student.last_name_c}
             </div>
-            <div className="text-sm text-gray-500">{student.email}</div>
+            <div className="text-sm text-gray-500">{student.email_c}</div>
           </div>
         </div>
       )

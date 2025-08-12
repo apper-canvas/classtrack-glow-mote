@@ -19,12 +19,12 @@ const ClassManager = () => {
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
   const [editingClass, setEditingClass] = useState(null);
-  const [formData, setFormData] = useState({
-    name: "",
-    subject: "",
-    room: "",
-    schedule: "",
-    studentIds: []
+const [formData, setFormData] = useState({
+    Name: "",
+    subject_c: "",
+    room_c: "",
+    schedule_c: "",
+    student_ids_c: []
   });
   const [formErrors, setFormErrors] = useState({});
 
@@ -65,13 +65,13 @@ const ClassManager = () => {
   };
 
   const handleEdit = (classItem) => {
-    setEditingClass(classItem);
+setEditingClass(classItem);
     setFormData({
-      name: classItem.name || "",
-      subject: classItem.subject || "",
-      room: classItem.room || "",
-      schedule: classItem.schedule || "",
-      studentIds: classItem.studentIds || []
+      Name: classItem.Name || "",
+      subject_c: classItem.subject_c || "",
+      room_c: classItem.room_c || "",
+      schedule_c: classItem.schedule_c || "",
+      student_ids_c: Array.isArray(classItem.student_ids_c) ? classItem.student_ids_c : (classItem.student_ids_c ? classItem.student_ids_c.toString().split(',').map(id => parseInt(id)) : [])
     });
     setFormErrors({});
     setShowModal(true);
@@ -131,8 +131,13 @@ const ClassManager = () => {
     }
   };
 
-  const getStudentCount = (classItem) => {
-    return classItem.studentIds ? classItem.studentIds.length : 0;
+const getStudentCount = (classItem) => {
+    if (Array.isArray(classItem.student_ids_c)) {
+      return classItem.student_ids_c.length;
+    } else if (classItem.student_ids_c) {
+      return classItem.student_ids_c.toString().split(',').length;
+    }
+    return 0;
   };
 
   const columns = [

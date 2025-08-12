@@ -40,7 +40,7 @@ const AttendanceTracker = () => {
     setError("");
     
     try {
-      const classData = await classService.getAll();
+const classData = await classService.getAll();
       setClasses(classData);
       
       if (classData.length > 0) {
@@ -65,14 +65,13 @@ const AttendanceTracker = () => {
         attendanceService.getAll()
       ]);
 
-      const classId = parseInt(selectedClass);
+const classId = parseInt(selectedClass);
       const filteredStudents = studentData.filter(student => 
-        student.classIds && student.classIds.includes(classId)
+        student.class_ids_c && student.class_ids_c.toString().split(',').map(id => parseInt(id)).includes(classId)
       );
       const filteredAttendance = attendanceData.filter(att => 
-        att.classId === classId && att.date === selectedDate
+        (att.class_id_c?.Id === classId || att.class_id_c === classId) && att.date_c === selectedDate
       );
-
       setStudents(filteredStudents);
       setAttendance(filteredAttendance);
     } catch (err) {
@@ -83,21 +82,21 @@ const AttendanceTracker = () => {
   };
 
   const getAttendanceStatus = (studentId) => {
-    const record = attendance.find(att => att.studentId === studentId);
-    return record ? record.status : "";
+const record = attendance.find(att => att.student_id_c?.Id === studentId || att.student_id_c === studentId);
+    return record ? record.status_c : "";
   };
 
   const handleAttendanceChange = async (studentId, status) => {
     setSaving(true);
     
     try {
-      const existingRecord = attendance.find(att => att.studentId === studentId);
+const existingRecord = attendance.find(att => att.student_id_c?.Id === studentId || att.student_id_c === studentId);
       const attendanceData = {
-        studentId,
-        classId: parseInt(selectedClass),
-        date: selectedDate,
-        status,
-        notes: ""
+        student_id_c: studentId,
+        class_id_c: parseInt(selectedClass),
+        date_c: selectedDate,
+        status_c: status,
+        notes_c: ""
       };
 
       if (existingRecord) {
@@ -123,7 +122,7 @@ const AttendanceTracker = () => {
     
     try {
       for (const student of students) {
-        await handleAttendanceChange(student.Id, "Present");
+await handleAttendanceChange(student.Id, "Present");
       }
       toast.success("All students marked present!");
     } catch (err) {
@@ -134,10 +133,10 @@ const AttendanceTracker = () => {
   };
 
   const getAttendanceStats = () => {
-    const total = students.length;
-    const present = attendance.filter(att => att.status === "Present").length;
-    const absent = attendance.filter(att => att.status === "Absent").length;
-    const late = attendance.filter(att => att.status === "Late").length;
+const total = students.length;
+    const present = attendance.filter(att => att.status_c === "Present").length;
+    const absent = attendance.filter(att => att.status_c === "Absent").length;
+    const late = attendance.filter(att => att.status_c === "Late").length;
     
     return { total, present, absent, late };
   };
@@ -196,9 +195,9 @@ const AttendanceTracker = () => {
                 onChange={(e) => setSelectedClass(e.target.value)}
                 className="w-full sm:w-48"
               >
-                {classes.map(cls => (
+{classes.map(cls => (
                   <option key={cls.Id} value={cls.Id}>
-                    {cls.name}
+                    {cls.Name}
                   </option>
                 ))}
               </Select>
@@ -269,10 +268,10 @@ const AttendanceTracker = () => {
                         <ApperIcon name="User" className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h3 className="font-medium text-gray-900">
-                          {student.firstName} {student.lastName}
+<h3 className="font-medium text-gray-900">
+                          {student.first_name_c} {student.last_name_c}
                         </h3>
-                        <p className="text-sm text-gray-500">Grade {student.gradeLevel}</p>
+                        <p className="text-sm text-gray-500">Grade {student.grade_level_c}</p>
                       </div>
                     </div>
                     

@@ -41,9 +41,9 @@ const StudentDetail = () => {
         assignmentService.getAll()
       ]);
 
-      setStudent(studentData);
-      setGrades(gradesData.filter(g => g.studentId === parseInt(id)));
-      setAttendance(attendanceData.filter(a => a.studentId === parseInt(id)));
+setStudent(studentData);
+      setGrades(gradesData.filter(g => (g.student_id_c?.Id === parseInt(id) || g.student_id_c === parseInt(id))));
+      setAttendance(attendanceData.filter(a => (a.student_id_c?.Id === parseInt(id) || a.student_id_c === parseInt(id))));
       setAssignments(assignmentsData);
     } catch (err) {
       setError("Failed to load student data");
@@ -55,8 +55,8 @@ const StudentDetail = () => {
   const calculateGPA = () => {
     if (grades.length === 0) return "N/A";
     
-    const total = grades.reduce((sum, grade) => {
-      return sum + (grade.score / grade.maxScore) * 100;
+const total = grades.reduce((sum, grade) => {
+      return sum + (grade.score_c / grade.max_score_c) * 100;
     }, 0);
     
     return (total / grades.length).toFixed(1) + "%";
@@ -64,24 +64,23 @@ const StudentDetail = () => {
 
   const getAttendanceRate = () => {
     if (attendance.length === 0) return "N/A";
-    
-    const presentCount = attendance.filter(a => a.status === "Present").length;
+const presentCount = attendance.filter(a => a.status_c === "Present").length;
     return ((presentCount / attendance.length) * 100).toFixed(1) + "%";
   };
 
   const getRecentAttendance = () => {
-    return attendance
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
+return attendance
+      .sort((a, b) => new Date(b.date_c) - new Date(a.date_c))
       .slice(0, 10);
   };
 
   const getRecentGrades = () => {
-    return grades
+return grades
       .map(grade => {
-        const assignment = assignments.find(a => a.Id === grade.assignmentId);
-        return { ...grade, assignmentName: assignment?.name || "Unknown Assignment" };
+        const assignment = assignments.find(a => a.Id === (grade.assignment_id_c?.Id || grade.assignment_id_c));
+        return { ...grade, assignmentName: assignment?.Name };
       })
-      .sort((a, b) => new Date(b.date) - new Date(a.date))
+      .sort((a, b) => new Date(b.date_c) - new Date(a.date_c))
       .slice(0, 5);
   };
 
@@ -122,29 +121,29 @@ const StudentDetail = () => {
             </div>
             <div className="flex-1">
               <h1 className="text-3xl font-bold text-gray-900 mb-2">
-                {student.firstName} {student.lastName}
+{student.first_name_c} {student.last_name_c}
               </h1>
               <div className="flex flex-wrap items-center gap-4 text-gray-600">
                 <div className="flex items-center">
                   <ApperIcon name="GraduationCap" className="w-4 h-4 mr-2" />
-                  Grade {student.gradeLevel}
+                  Grade {student.grade_level_c}
                 </div>
-                {student.email && (
+                {student.email_c && (
                   <div className="flex items-center">
                     <ApperIcon name="Mail" className="w-4 h-4 mr-2" />
-                    {student.email}
+                    {student.email_c}
                   </div>
                 )}
-                {student.phone && (
+                {student.phone_c && (
                   <div className="flex items-center">
                     <ApperIcon name="Phone" className="w-4 h-4 mr-2" />
-                    {student.phone}
+                    {student.phone_c}
                   </div>
                 )}
-                {student.dateOfBirth && (
+                {student.date_of_birth_c && (
                   <div className="flex items-center">
                     <ApperIcon name="Calendar" className="w-4 h-4 mr-2" />
-                    Born {format(new Date(student.dateOfBirth), "MMM dd, yyyy")}
+                    Born {format(new Date(student.date_of_birth_c), "MMM dd, yyyy")}
                   </div>
                 )}
               </div>
@@ -215,14 +214,14 @@ const StudentDetail = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <div>
+<div>
                       <p className="font-medium text-gray-900">{grade.assignmentName}</p>
                       <p className="text-sm text-gray-500">
-                        {format(new Date(grade.date), "MMM dd, yyyy")}
+                        {format(new Date(grade.date_c), "MMM dd, yyyy")}
                       </p>
                     </div>
-                    <Badge variant={grade.score / grade.maxScore >= 0.8 ? "success" : grade.score / grade.maxScore >= 0.6 ? "warning" : "error"}>
-                      {grade.score}/{grade.maxScore} ({((grade.score / grade.maxScore) * 100).toFixed(0)}%)
+                    <Badge variant={grade.score_c / grade.max_score_c >= 0.8 ? "success" : grade.score_c / grade.max_score_c >= 0.6 ? "warning" : "error"}>
+                      {grade.score_c}/{grade.max_score_c} ({((grade.score_c / grade.max_score_c) * 100).toFixed(0)}%)
                     </Badge>
                   </motion.div>
                 ))}
@@ -252,11 +251,11 @@ const StudentDetail = () => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: index * 0.1 }}
                   >
-                    <p className="font-medium text-gray-900">
-                      {format(new Date(att.date), "MMM dd, yyyy")}
+<p className="font-medium text-gray-900">
+                      {format(new Date(att.date_c), "MMM dd, yyyy")}
                     </p>
-                    <Badge variant={att.status.toLowerCase()}>
-                      {att.status}
+                    <Badge variant={att.status_c.toLowerCase()}>
+                      {att.status_c}
                     </Badge>
                   </motion.div>
                 ))}

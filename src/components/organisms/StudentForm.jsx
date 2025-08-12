@@ -7,14 +7,14 @@ import { studentService } from "@/services/api/studentService";
 import { classService } from "@/services/api/classService";
 
 const StudentForm = ({ student = null, onSave, onCancel }) => {
-  const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    gradeLevel: "",
-    dateOfBirth: "",
-    email: "",
-    phone: "",
-    classIds: []
+const [formData, setFormData] = useState({
+    first_name_c: "",
+    last_name_c: "",
+    grade_level_c: "",
+    date_of_birth_c: "",
+    email_c: "",
+    phone_c: "",
+    class_ids_c: []
   });
   const [classes, setClasses] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -23,14 +23,14 @@ const StudentForm = ({ student = null, onSave, onCancel }) => {
   useEffect(() => {
     loadClasses();
     if (student) {
-      setFormData({
-        firstName: student.firstName || "",
-        lastName: student.lastName || "",
-        gradeLevel: student.gradeLevel || "",
-        dateOfBirth: student.dateOfBirth || "",
-        email: student.email || "",
-        phone: student.phone || "",
-        classIds: student.classIds || []
+setFormData({
+        first_name_c: student.first_name_c || "",
+        last_name_c: student.last_name_c || "",
+        grade_level_c: student.grade_level_c || "",
+        date_of_birth_c: student.date_of_birth_c || "",
+        email_c: student.email_c || "",
+        phone_c: student.phone_c || "",
+        class_ids_c: Array.isArray(student.class_ids_c) ? student.class_ids_c : (student.class_ids_c ? student.class_ids_c.toString().split(',').map(id => parseInt(id)) : [])
       });
     }
   }, [student]);
@@ -59,8 +59,8 @@ const StudentForm = ({ student = null, onSave, onCancel }) => {
       newErrors.gradeLevel = "Grade level is required";
     }
     
-    if (!formData.dateOfBirth) {
-      newErrors.dateOfBirth = "Date of birth is required";
+if (!formData.date_of_birth_c) {
+      newErrors.date_of_birth_c = "Date of birth is required";
     }
     
     if (formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
